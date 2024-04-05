@@ -1,5 +1,7 @@
 # Facial Recognition-Based Door Access System
 
+[User Manual](FacialRecognition_RPI.pdf)
+
 ## Table of Contents
 - [Executive Summary](#executive-summary)
 - [Introduction](#introduction)
