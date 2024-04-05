@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Recognition-Based Door Access System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #d91c26;
+        }
+
+        a {
+            color: #d91c26;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #d91c26;
+            color: white;
+            padding: 15px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        .camera-container {
+            border: 15px solid #d91c26;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            width: 70%;
+            max-width: 800px; /* Adjust the max-width as needed */
+            height: 60vh; /* Adjust the height as needed */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box; /* Include border in width and height calculation */
+            margin-left: auto; /* Center horizontally */
+            margin-right: auto; /* Center horizontally */
+        }
+
+        #camera-feed {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: 10px solid #d91c26; /* Adjust the border size as needed */
+            border-radius: 10px;
+        }
+
+        #no-display {
+            color: #d91c26;
+            font-size: 24px;
+            display: none;
+        }
+
+        img {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Facial Recognition-Based Door Access System</h1>
+
+        <!-- Video Feed -->
+        <div class="camera-container">
+            <img id="camera-feed" src="{{ url_for('video_feed') }}" alt="Camera Feed">
+            <p id="no-display">No Display</p>
+        </div>
+
+        <!-- Unlock Button -->
+        <form id="unlockForm" action="{{ url_for('unlock_door_route') }}" method="post">
+            <button type="submit">Unlock Door</button>
+        </form>
+
+        <!-- Add/Remove Users Link -->
+        <a href="{{ url_for('add_remove_users') }}">Add/Remove Users</a>
+
+        <!-- Include jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                if ($("#camera-feed").attr("src") === "") {
+                    $("#camera-feed").hide();
+                    $("#no-display").show();
+                } else {
+                    $("#camera-feed").show();
+                    $("#no-display").hide();
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

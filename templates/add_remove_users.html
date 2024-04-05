@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Remove Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Add/Remove Users</h1>
+
+    <!-- Add Known Face Section -->
+    <section id="add-known-face">
+        <h2>Add Known Face</h2>
+        <form method="POST" action="{{ url_for('add_remove_users') }}" enctype="multipart/form-data">
+            <label for="person_name">Person Name:</label>
+            <input type="text" name="person_name" required>
+            <br>
+            <label for="image_file">Image File:</label>
+            <input type="file" name="image_file" accept=".jpg, .png" required>
+            <br>
+            <button type="submit" name="add_known_face">Add Face</button>
+        </form>
+    </section>
+
+    <!-- Remove Known Face Section -->
+    <section id="remove-known-face">
+        <h2>Remove Known Face</h2>
+        <form method="POST" action="{{ url_for('add_remove_users') }}">
+            <label for="person_name">Select Person to Remove:</label>
+            <select name="person_name" required>
+                {% for name in person_names %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit" name="remove_known_face">Remove Face</button>
+        </form>
+    </section>
+
+    <button onclick="goBack()">Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <!-- Include jQuery library (if not included in the index.html file) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</body>
+</html>
